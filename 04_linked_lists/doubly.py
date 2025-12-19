@@ -3,7 +3,6 @@ class Node:
         self.data = data
         self.next = None
         self.prev = None
-
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -23,7 +22,8 @@ class DoublyLinkedList:
             return
         
         curr = self.head
-        while curr.next is not None:
+        # actually walker node is smart move here but im trying out something tougher
+        while curr.next is not None: 
             curr = curr.next
 
         curr.next = new_node
