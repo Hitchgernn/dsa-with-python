@@ -3,55 +3,59 @@ class Node:
         self.data = data
         self.next = None
         self.prev = None
+
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
-    
+        self.tail = None
+
     def insert_front(self, data):
         new_node = Node(data)
-        if self.head is not None:
-            self.head.prev = new_node
-            new_node.next = self.head
+        if self.head is None:
+            self.head = self.tail = new_node
+            return
         
+        new_node.next = self.head
+        self.head.prev = new_node
         self.head = new_node
 
     def insert_end(self, data):
         new_node = Node(data)
-        if self.head is None:
-            self.head = new_node
+
+        if self.tail is None:
+            self.head = self.tail = new_node
             return
         
-        curr = self.head
-        # actually tail is smart move here but im trying out something tougher
-        while curr.next is not None: 
-            curr = curr.next
-
-        curr.next = new_node
-        new_node.prev = curr
+        new_node.prev = self.tail
+        self.tail.next = new_node
+        self.tail = new_node
 
     def delete(self, value):
         curr = self.head
 
-        if curr is None:
-            print("list is empyt")
-            return
-        
-        if curr.data == value:
-            self.head = curr.next
-            if self.head is not None:
-                self.head.prev = None
-            return 
-        
         while curr is not None and curr.data != value:
             curr = curr.next
-        
+
         if curr is None:
             print("value not found")
             return
         
-        if curr.next is not None:
-            curr.next.prev = curr.prev
+        if curr is self.head and curr is self.tail:
+            self.head = self.tail = None
+            return
+
+        if curr is self.head:
+            self.head = curr.next
+            self.head.prev = None
+            return
+        
+        if curr is self.tail:
+            self.tail = curr.prev
+            self.tail.next = None
+            return
+        
         curr.prev.next = curr.next
+        curr.next.prev = curr.prev
 
     def display(self):
         print("list display")
