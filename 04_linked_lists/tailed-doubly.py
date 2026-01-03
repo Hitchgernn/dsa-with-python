@@ -69,14 +69,14 @@ class DoublyLinkedList:
         print("None")
 
 if __name__ == "__main__":
-    sll = DoublyLinkedList()
+    dll = DoublyLinkedList()
 
-    sll.insert_front(10)
-    sll.insert_front(20)
-    sll.insert_end(30)
-    sll.insert_end(40)
+    dll.insert_front(10)
+    dll.insert_front(20)
+    dll.insert_end(30)
+    dll.insert_end(40)
 
-    sll.display()
+    dll.display()
     
-    sll.delete(30)
-    sll.display()
+    dll.delete(30)
+    dll.display()
